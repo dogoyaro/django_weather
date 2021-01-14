@@ -11,6 +11,7 @@ from .utils.exceptions import WeatherDataException
 async def index(request):
     form = CityForm(request.GET);
     appId = get_app_Id()
+    response = {}
 
     if not form.is_valid():
         form = CityForm()
@@ -18,10 +19,9 @@ async def index(request):
     else:
         city = form.cleaned_data['city']
         weather_params = {
-            'city': 'coronada',
-            'appId': '',
+            'city': city,
+            'appId': appId,
         }
-        response = {'form': form}
         try:
             async with WeatherData(weather_params) as weather_data:
                 weather = get_weather_data(weather_data)
@@ -29,5 +29,7 @@ async def index(request):
         except WeatherDataException as exc:
             error = { 'message': exc.message }
             response['error'] = error
-
+    
+    response['form'] = form
+    print('The response: ', response)
     return render(request, 'weather/index.html', response)

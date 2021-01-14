@@ -7,6 +7,7 @@ class WeatherData:
     
     async def __aenter__(self):
         weather_data = await self.get_weather_data()
+        self.weather_data = weather_data
         return weather_data
 
     async def get_weather_data(self):
@@ -20,7 +21,7 @@ class WeatherData:
             try:
                 async with session.get('https://api.openweathermap.org/data/2.5/weather?q={}&appid={}&units={}&lang={}'.format(city, appId, units, lang)) as response:
                     weatherData = await response.json()
-                    if (weatherData.get('cod') != '200'):
+                    if (weatherData.get('cod') != 200):
                         raise WeatherDataException(message=weatherData.get('message'))
                     return weatherData
             except Exception as exc:
