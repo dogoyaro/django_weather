@@ -1,5 +1,6 @@
 import aiohttp
 from .exceptions import WeatherDataException
+from .cache import weather_cache
 
 
 class WeatherData:
@@ -11,6 +12,7 @@ class WeatherData:
         self.weather_data = weather_data
         return weather_data
 
+    @weather_cache
     async def get_weather_data(self):
         async with aiohttp.ClientSession() as session:
             params = self.params

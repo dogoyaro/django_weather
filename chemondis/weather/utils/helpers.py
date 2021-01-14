@@ -14,6 +14,6 @@ def get_weather_data(weather_data):
         'windspeed': wind['speed'],
         'windspeed_direction': wind['deg'],
         'description': weath['description'],
-     }
+     } 
 
     return weather
