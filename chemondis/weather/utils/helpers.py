@@ -1,5 +1,7 @@
+from django.conf import settings
+
 def get_app_Id():
-    app_id = '7ead097d849f6a662d7c0dcbed694654'
+    app_id = settings.APP_ID
     return app_id
 
 def get_weather_data(weather_data):

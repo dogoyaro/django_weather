@@ -9,11 +9,22 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+import os
 from pathlib import Path
+
+def get_environment_variable(variable):
+    try:
+        return os.environ[variable]
+    except KeyError as exc:
+        raise RuntimeError('missing enironment variable: {}'.format(variable))
+
+# APP ID for open weather map api calls
+# APP_ID = get_environment_variable('APP_ID')
+APP_ID = '7ead097d849f6a662d7c0dcbed694654'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -21,6 +32,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '2u9fd+ygdwx4v9@6&(+r@ia&xnqaipx9&q02b38c4g)1t(*_%e'
+# SECRET_KEY = get_environment_variable('SECRET_KEY')
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
