@@ -28,8 +28,9 @@ async def index(request):
                 error = {"message": exc.message}
                 response["error"] = error
 
-    except Exception:
+    except Exception as exc:
         # TODO: Log Fatal Error for debugging
+        raise
         error = {"message": "Something went wrong, Please try again"}
         response["error"] = error
 
