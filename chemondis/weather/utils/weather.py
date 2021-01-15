@@ -1,4 +1,6 @@
 import aiohttp
+
+from weather.models import Weather
 from .exceptions import WeatherDataException
 from .cache import weather_cache
 
@@ -29,9 +31,14 @@ class WeatherData:
                         city, appId, units, lang
                     )
                 ) as response:
-                    weatherData = await response.json()
-                    if weatherData.get("cod") != 200:
-                        raise WeatherDataException(message=weatherData.get("message"))
+                    weatherResponse = await response.json()
+                    
+                    if weatherResponse.get("cod") != 200:
+                        raise WeatherDataException(message=weatherResponse.get("message"))
+
+                    weather = Weather(weatherResponse)
+                    weatherData = weather.get_data()
+                    
                     return weatherData
             except Exception as exc:
                 # TODO: Log exceptions in api call

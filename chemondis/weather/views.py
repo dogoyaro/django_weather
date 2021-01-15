@@ -22,8 +22,7 @@ async def index(request):
             city = form.cleaned_data["city"]
             weather_params = {}
             try:
-                async with WeatherData(city, appId, weather_params) as weather_data:
-                    weather = get_weather_data(weather_data)
+                async with WeatherData(city, appId, weather_params) as weather:
                     response["weather"] = weather
             except WeatherDataException as exc:
                 error = {"message": exc.message}
