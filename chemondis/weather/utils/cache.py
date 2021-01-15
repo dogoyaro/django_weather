@@ -7,6 +7,7 @@ def weather_cache(weather_api_fetch):
     async def get_data(self, *args, **kwargs):
         params = self.params
         cache_key = params['city'] + params.get('units', 'metric') + params.get('lang', 'en')
+        cache_key = cache_key.replace(' ', '_')
         result = None
         try:
             result = await cache.get(cache_key)
@@ -18,7 +19,6 @@ def weather_cache(weather_api_fetch):
         finally:
             if not result:
                 result = await weather_api_fetch(self, *args, **kwargs)
-                print('The result', result)
                 cache.add(cache_key, result, settings.CACHE_TIMEOUT)
 
         return result
