@@ -3,8 +3,13 @@
     <input type="submit" value="OK">
 </form>
 
+{% if weather %}
 <table class="properties">
     <tbody>
+        <tr>
+            <th scope="row">City: </th>
+            <td>{{ weather.city }}</td>
+        </tr>
         <tr>
             <th scope="row">Description: </th>
             <td>{{ weather.description }}</td>
@@ -41,3 +46,8 @@
         </tr>
     </tbody>
 </table>
+{% endif %}
+
+{% if error %}
+<h3>{{ error.message }}</h3>
+{% endif %}
