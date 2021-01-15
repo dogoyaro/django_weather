@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 
 from .form import CityForm
 from .utils.weather import WeatherData
-from .utils.helpers import get_app_Id, get_weather_data
+from .utils.helpers import get_app_Id
 from .utils.exceptions import WeatherDataException
 
 

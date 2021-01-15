@@ -8,7 +8,7 @@ def weather_cache(weather_api_fetch):
         params = self.params
         cache_key = params['city'] + params.get('units', 'metric') + params.get('lang', 'en')
         try:
-            result = cache.get(cache_key)
+            result = await cache.get(cache_key)
 
         except Exception as exc:
             # TODO: log cache failure
