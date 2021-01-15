@@ -7,29 +7,36 @@ from .form import CityForm
 from .utils.weather import WeatherData
 from .utils.helpers import get_app_Id, get_weather_data
 from .utils.exceptions import WeatherDataException
-        
+
+
 async def index(request):
-    form = CityForm(request.GET);
-    appId = get_app_Id()
-    response = {}
+    try:
+        form = CityForm(request.GET)
+        appId = get_app_Id()
+        response = {}
 
-    if not form.is_valid():
-        form = CityForm()
+        if not form.is_valid():
+            form = CityForm()
 
-    else:
-        city = form.cleaned_data['city']
-        weather_params = {
-            'city': city,
-            'appId': appId,
-        }
-        try:
-            async with WeatherData(weather_params) as weather_data:
-                weather = get_weather_data(weather_data)
-                response['weather'] = weather
-        except WeatherDataException as exc:
-            error = { 'message': exc.message }
-            response['error'] = error
-    
-    response['form'] = form
-    print('The response: ', response)
-    return render(request, 'weather/index.html', response)
+        else:
+            city = form.cleaned_data["city"]
+            weather_params = {
+                "city": city,
+                "appId": appId,
+            }
+            try:
+                async with WeatherData(weather_params) as weather_data:
+                    weather = get_weather_data(weather_data)
+                    response["weather"] = weather
+            except WeatherDataException as exc:
+                error = {"message": exc.message}
+                response["error"] = error
+
+    except Exception:
+        # TODO: Log Fatal Error for debugging
+        error = {"message": "Something went wrong, Please try again"}
+        response["error"] = error
+
+    response["form"] = form
+    print("The response: ", response)
+    return render(request, "weather/index.html", response)
