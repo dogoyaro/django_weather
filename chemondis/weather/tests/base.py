@@ -33,7 +33,6 @@ test_weather = {
 
 
 class MockResponse:
-    # mock json() method always returns a specific testing dictionary
     @staticmethod
     async def json():
         return test_weather
