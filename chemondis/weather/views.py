@@ -20,12 +20,9 @@ async def index(request):
 
         else:
             city = form.cleaned_data["city"]
-            weather_params = {
-                "city": city,
-                "appId": appId,
-            }
+            weather_params = {}
             try:
-                async with WeatherData(weather_params) as weather_data:
+                async with WeatherData(city, appId, weather_params) as weather_data:
                     weather = get_weather_data(weather_data)
                     response["weather"] = weather
             except WeatherDataException as exc:

@@ -4,8 +4,10 @@ from .cache import weather_cache
 
 
 class WeatherData:
-    def __init__(self, weather_params):
+    def __init__(self, city, appId, weather_params):
         self.params = weather_params
+        self.params['city'] = city
+        self.params['appId'] = appId
 
     async def __aenter__(self):
         weather_data = await self.get_weather_data()
