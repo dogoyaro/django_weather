@@ -2,3 +2,42 @@
     {{ form }}
     <input type="submit" value="OK">
 </form>
+
+<table class="properties">
+    <tbody>
+        <tr>
+            <th scope="row">Description: </th>
+            <td>{{ weather.description }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Temperature: </th>
+            <td>{{ weather.temp }}</td>
+            <td>Celsius ( °C )</td>
+        </tr>
+        <tr>
+            <th scope="row">Minimum Temperature: </th>
+            <td>{{ weather.min_temp }}</td>
+            <td>Celsius ( °C )</td>
+        </tr>
+        <tr>
+            <th scope="row">Maximum Temperature: </th>
+            <td>{{ weather.max_temp }}</td>
+            <td>Celsius ( °C )</td>
+        </tr>
+        <tr>
+        <tr>
+            <th scope="row">Humidity: </th>
+            <td>{{ weather.humidity }}</td>
+            <td>(g m*)</td>
+        </tr>
+        <tr>
+            <th scope="row">Wind Speed: </th>
+            <td>{{ weather.windspeed }}</td>
+            <td>(km / h)</td>
+        </tr>
+        <tr>
+            <th scope="row">Wind Direction: </th>
+            <td>{{ weather.windspeed_direction }}</td>
+        </tr>
+    </tbody>
+</table>
