@@ -8,8 +8,8 @@ from .cache import weather_cache
 class WeatherData:
     def __init__(self, city, appId, weather_params):
         self.params = weather_params
-        self.params['city'] = city
-        self.params['appId'] = appId
+        self.params["city"] = city
+        self.params["appId"] = appId
 
     async def __aenter__(self):
         weather_data = await self.get_weather_data()
@@ -32,13 +32,14 @@ class WeatherData:
                     )
                 ) as response:
                     weatherResponse = await response.json()
-                    
                     if weatherResponse.get("cod") != 200:
-                        raise WeatherDataException(message=weatherResponse.get("message"))
+                        raise WeatherDataException(
+                            message=weatherResponse.get("message")
+                        )
 
                     weather = Weather(weatherResponse)
                     weatherData = weather.get_data()
-                    
+
                     return weatherData
             except Exception as exc:
                 # TODO: Log exceptions in api call
@@ -47,5 +48,4 @@ class WeatherData:
                 )
 
     async def __aexit__(self, exc_type, exc_val, exc_tb):
-        # handle caching the city information here
         pass

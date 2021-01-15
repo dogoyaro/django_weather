@@ -2,6 +2,7 @@ import aiohttp
 import asyncio
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from django.conf import settings
 
 from .form import CityForm
 from .utils.weather import WeatherData
@@ -30,7 +31,8 @@ async def index(request):
 
     except Exception as exc:
         # TODO: Log Fatal Error for debugging
-        raise
+        if settings.DEBUG:
+            raise
         error = {"message": "Something went wrong, Please try again"}
         response["error"] = error
 
