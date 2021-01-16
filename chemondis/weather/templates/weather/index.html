@@ -5,12 +5,16 @@
 {% translate "View the weather in:" %}
 {% for lang_code, lang_name in languages %}
     {% language lang_code %}
-    <a href="{% url 'weather' %}?city={{ weather.city }}">{{ lang_name }}</a>
+    {% if weather.city %}
+        <a href="{% url 'weather' %}?city={{ form.city.value }}">{{ lang_name }}</a>
+    {% else %}
+        <a href="{% url 'weather' %}">{{ lang_name }}</a>
+    {% endif %}
     {% endlanguage %}
 {% endfor %}
 
 
-<form action="/weather" method="get">
+<form action="{% url 'weather' %}" method="get">
     {{ form }}
     <input type="submit" value="OK">
 </form>
@@ -61,6 +65,5 @@
 {% endif %}
 
 {% if error %}
-<h3>{{ error.message }}</h3>
 <h3>{% translate error.message %}</h3>
 {% endif %}

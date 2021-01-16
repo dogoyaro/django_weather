@@ -22,6 +22,7 @@ async def index(request):
         else:
             city = form.cleaned_data["city"]
             lang = request.LANGUAGE_CODE
+            print('the lang value: ', lang)
             weather_params = {
                 'lang': lang
             }

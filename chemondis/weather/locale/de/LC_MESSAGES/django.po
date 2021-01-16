@@ -20,36 +20,43 @@ msgstr ""
 
 #: templates/weather/index.html:5
 msgid "View the weather in:"
-msgstr ""
+msgstr "Sehen Sie sich das Wetter an in:"
 
 #: templates/weather/index.html:22
 msgid "City"
-msgstr ""
+msgstr "Stadt"
 
 #: templates/weather/index.html:26
 msgid "Description"
-msgstr ""
+msgstr "Beschreibung"
 
 #: templates/weather/index.html:30
 msgid "Temperature"
-msgstr ""
+msgstr "Temperatur"
 
 #: templates/weather/index.html:35
 msgid "Minimum Temperature"
-msgstr ""
+msgstr "Mindesttemperatur"
 
 #: templates/weather/index.html:40
 msgid "Maximum Temperature"
-msgstr ""
+msgstr "Maximale Temperatur"
 
 #: templates/weather/index.html:46
 msgid "Humidity"
-msgstr ""
+msgstr "Feuchtigkeit"
 
 #: templates/weather/index.html:51
 msgid "Wind Speed"
-msgstr ""
+msgstr "Windgeschwindigkeit"
 
 #: templates/weather/index.html:56
 msgid "Wind Direction"
-msgstr ""
+msgstr "Windrichtung"
+
+msgid "Error fetching weather information: city not found"
+msgstr "Fehler beim Abrufen der Wetterinformationen: Stadt nicht gefunden"
+
+#: weather/form.py:5
+msgid "Enter a city"
+msgstr "Betritt eine Stadt"
