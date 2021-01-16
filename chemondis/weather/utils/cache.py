@@ -4,7 +4,15 @@ from .exceptions import WeatherCacheException
 
 
 def weather_cache(weather_api_fetch):
+    """ Weather cache decorator """
     async def get_data(self, *args, **kwargs):
+        """ Wrapper function to get data from cache
+        
+            Creates a cache key using provided params
+            returns the result of getting the weather data from the cache
+            or runs the decorated function to get the weather data
+         """
+
         params = self.params
         cache_key = params['city'] + params.get('units', 'metric') + params.get('lang', 'en')
         cache_key = cache_key.replace(' ', '_')

@@ -7,6 +7,7 @@ from .base import MockSession
 class UtilsTest(TestCase):
     @patch("weather.utils.weather.aiohttp.ClientSession")
     async def test_get_weather_data(self, mock_session):
+        """ Test get weather data context manager """
         mock_session.return_value = MockSession()
         async with WeatherData("dubai", "test_app_id", {}) as weather:
             self.assertCountEqual(

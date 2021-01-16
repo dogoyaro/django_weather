@@ -6,18 +6,37 @@ from .cache import weather_cache
 
 
 class WeatherData:
+    """ Weather Data Context Manager """
     def __init__(self, city, appId, weather_params):
+        """
+        Parameters
+        __________
+        city:
+            The city for which weather data is requested
+        appId:
+            The application id for the weather api
+        weather_params:
+            The optional weather params
+        """
+
         self.params = weather_params
         self.params["city"] = city
         self.params["appId"] = appId
 
+
     async def __aenter__(self):
-        weather_data = await self.get_weather_data()
+        weather_data = await self.__get_weather_data()
         self.weather_data = weather_data
         return weather_data
 
+    async def __aexit__(self, exc_type, exc_val, exc_tb):
+        pass
+
     @weather_cache
-    async def get_weather_data(self):
+    async def __get_weather_data(self):
+        """
+        Make weather data API request
+        """
         async with aiohttp.ClientSession() as session:
             params = self.params
             city = params["city"]
@@ -46,6 +65,3 @@ class WeatherData:
                 raise WeatherDataException(
                     message="Error fetching weather information: {}".format(exc.message)
                 )
-
-    async def __aexit__(self, exc_type, exc_val, exc_tb):
-        pass

@@ -11,6 +11,7 @@ from .utils.exceptions import WeatherDataException
 
 
 async def index(request):
+    """ Index view for providing weather form """
     try:
         form = CityForm(request.GET)
         appId = get_app_Id()

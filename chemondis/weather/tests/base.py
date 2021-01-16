@@ -39,6 +39,8 @@ class MockResponse:
 
 
 class MockSession:
+    """ Mock aiohttp request session context manager"""
+
     def _init__(self, url):
         self._text = url
         self.status = status

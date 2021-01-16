@@ -1,7 +1,20 @@
-from django.db import models
-
 class Weather:
+    """ Model for weather data
+
+    Methods
+    _______
+
+    get_data():
+        Return the data from weather_api call
+    """
     def __init__(self, weatherData):
+        """
+        Parameters
+        ___________
+
+        weatherData: dict
+            The weather Data gotten from the API
+        """
         self.weather_data = weatherData;
 
     def get_data(self):
