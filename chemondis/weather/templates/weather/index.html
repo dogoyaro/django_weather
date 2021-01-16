@@ -1,3 +1,15 @@
+{% load i18n %}
+
+{% get_available_languages as languages %}
+
+{% translate "View the weather in:" %}
+{% for lang_code, lang_name in languages %}
+    {% language lang_code %}
+    <a href="{% url 'weather' %}?city={{ weather.city }}">{{ lang_name }}</a>
+    {% endlanguage %}
+{% endfor %}
+
+
 <form action="/weather" method="get">
     {{ form }}
     <input type="submit" value="OK">

@@ -21,7 +21,10 @@ async def index(request):
 
         else:
             city = form.cleaned_data["city"]
-            weather_params = {}
+            lang = request.LANGUAGE_CODE
+            weather_params = {
+                'lang': lang
+            }
             try:
                 async with WeatherData(city, appId, weather_params) as weather:
                     response["weather"] = weather
