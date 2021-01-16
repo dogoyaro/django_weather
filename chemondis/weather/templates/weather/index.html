@@ -19,41 +19,41 @@
 <table class="properties">
     <tbody>
         <tr>
-            <th scope="row">City: </th>
+            <th scope="row">{% translate "City" %}: </th>
             <td>{{ weather.city }}</td>
         </tr>
         <tr>
-            <th scope="row">Description: </th>
+            <th scope="row">{% translate "Description" %}: </th>
             <td>{{ weather.description }}</td>
         </tr>
         <tr>
-            <th scope="row">Temperature: </th>
+            <th scope="row">{% translate "Temperature" %}: </th>
             <td>{{ weather.temp }}</td>
             <td>Celsius ( °C )</td>
         </tr>
         <tr>
-            <th scope="row">Minimum Temperature: </th>
+            <th scope="row">{% translate "Minimum Temperature" %}: </th>
             <td>{{ weather.min_temp }}</td>
             <td>Celsius ( °C )</td>
         </tr>
         <tr>
-            <th scope="row">Maximum Temperature: </th>
+            <th scope="row">{% translate "Maximum Temperature" %}: </th>
             <td>{{ weather.max_temp }}</td>
             <td>Celsius ( °C )</td>
         </tr>
         <tr>
         <tr>
-            <th scope="row">Humidity: </th>
+            <th scope="row">{% translate "Humidity" %}: </th>
             <td>{{ weather.humidity }}</td>
             <td>(g m*)</td>
         </tr>
         <tr>
-            <th scope="row">Wind Speed: </th>
+            <th scope="row">{% translate "Wind Speed" %}: </th>
             <td>{{ weather.windspeed }}</td>
             <td>(km / h)</td>
         </tr>
         <tr>
-            <th scope="row">Wind Direction: </th>
+            <th scope="row">{% translate "Wind Direction" %}: </th>
             <td>{{ weather.windspeed_direction }}</td>
         </tr>
     </tbody>
@@ -62,4 +62,5 @@
 
 {% if error %}
 <h3>{{ error.message }}</h3>
+<h3>{% translate error.message %}</h3>
 {% endif %}
