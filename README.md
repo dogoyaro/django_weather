@@ -18,6 +18,9 @@ How to run the app:
     - Change directory into chemondis
         `cd chemondis`
     - Ensure that you have docker installed
+    - Make a copy of the .env_ file and replace dummy environment variables with the real values
+        NB: Application Id is provided by creating an account with openweatherapi.org
+    - export the environment variables
     - Run application
         `docker-compose up`
     - Navigate to the app when on localhost port 8000 on your browser
