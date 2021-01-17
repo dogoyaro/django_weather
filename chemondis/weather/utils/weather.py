@@ -1,13 +1,17 @@
 import aiohttp
 
 from weather.models import Weather
-from .exceptions import WeatherDataException
 from .cache import weather_cache
+
+
+class WeatherDataException(Exception):
+    """ Weather Data Fetch Exception """
 
 
 class WeatherData:
     """ Weather Data Context Manager """
-    def __init__(self, city, appId, weather_params):
+
+    def __init__(self, city, appId, lang='en', units='metric', **kwargs):
         """
         Parameters
         __________
@@ -19,9 +23,12 @@ class WeatherData:
             The optional weather params
         """
 
-        self.params = weather_params
+        self.params = {}
         self.params["city"] = city
         self.params["appId"] = appId
+        self.params["lang"] = lang
+        self.params["units"] = units
+        self.params.update(**kwargs)
 
 
     async def __aenter__(self):
@@ -41,8 +48,8 @@ class WeatherData:
             params = self.params
             city = params["city"]
             appId = params["appId"]
-            units = params.get("units", "metric")
-            lang = params.get("lang", "en")
+            units = params["units"]
+            lang = params["lang"]
 
             try:
                 async with session.get(
@@ -52,9 +59,7 @@ class WeatherData:
                 ) as response:
                     weatherResponse = await response.json()
                     if weatherResponse.get("cod") != 200:
-                        raise WeatherDataException(
-                            message=weatherResponse.get("message")
-                        )
+                        raise WeatherDataException(weatherResponse.get("message"))
 
                     weather = Weather(weatherResponse)
                     weatherData = weather.get_data()
@@ -63,5 +68,5 @@ class WeatherData:
             except Exception as exc:
                 # TODO: Log exceptions in api call
                 raise WeatherDataException(
-                    message="Error fetching weather information: {}".format(exc.message)
+                   "Error fetching weather information: {}".format(str(exc))
                 )

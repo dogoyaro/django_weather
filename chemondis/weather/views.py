@@ -5,16 +5,14 @@ from django.http import HttpResponseRedirect
 from django.conf import settings
 
 from .form import CityForm
-from .utils.weather import WeatherData
-from .utils.helpers import get_app_Id
-from .utils.exceptions import WeatherDataException
+from .utils.weather import WeatherData, WeatherDataException
 
 
 async def index(request):
     """ Index view for providing weather form """
     try:
         form = CityForm(request.GET)
-        appId = get_app_Id()
+        appId = settings.APP_ID
         response = {}
 
         if not form.is_valid():
@@ -23,14 +21,11 @@ async def index(request):
         else:
             city = form.cleaned_data["city"]
             lang = request.LANGUAGE_CODE
-            weather_params = {
-                'lang': lang
-            }
             try:
-                async with WeatherData(city, appId, weather_params) as weather:
+                async with WeatherData(city, appId, lang=lang) as weather:
                     response["weather"] = weather
             except WeatherDataException as exc:
-                error = {"message": exc.message}
+                error = {"message": str(exc)}
                 response["error"] = error
 
     except Exception as exc:
@@ -41,5 +36,4 @@ async def index(request):
         response["error"] = error
 
     response["form"] = form
-    print("The response: ", response)
     return render(request, "weather/index.html", response)

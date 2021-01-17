@@ -9,7 +9,7 @@ class UtilsTest(TestCase):
     async def test_get_weather_data(self, mock_session):
         """ Test get weather data context manager """
         mock_session.return_value = MockSession()
-        async with WeatherData("dubai", "test_app_id", {}) as weather:
+        async with WeatherData("dubai", "test_app_id") as weather:
             self.assertCountEqual(
                 weather.keys(),
                 [
