@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 from pathlib import Path
 from django.utils.translation import gettext_lazy as _
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def get_environment_variable(variable):
     try:
@@ -20,8 +23,7 @@ def get_environment_variable(variable):
         raise RuntimeError('missing enironment variable: {}'.format(variable))
 
 # APP ID for open weather map api calls
-# APP_ID = get_environment_variable('APP_ID')
-APP_ID = '7ead097d849f6a662d7c0dcbed694654'
+APP_ID = get_environment_variable('APP_ID')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -32,8 +34,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '2u9fd+ygdwx4v9@6&(+r@ia&xnqaipx9&q02b38c4g)1t(*_%e'
-# SECRET_KEY = get_environment_variable('SECRET_KEY')
+SECRET_KEY = get_environment_variable('SECRET_KEY')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
