@@ -11,7 +11,7 @@ class WeatherDataException(Exception):
 class WeatherData:
     """ Weather Data Context Manager """
 
-    def __init__(self, city, appId, lang='en', units='metric', **kwargs):
+    def __init__(self, city, appId, lang="en", units="metric", **kwargs):
         """
         Parameters
         __________
@@ -29,7 +29,6 @@ class WeatherData:
         self.params["lang"] = lang
         self.params["units"] = units
         self.params.update(**kwargs)
-
 
     async def __aenter__(self):
         weather_data = await self.__get_weather_data()
@@ -68,5 +67,5 @@ class WeatherData:
             except Exception as exc:
                 # TODO: Log exceptions in api call
                 raise WeatherDataException(
-                   "Error fetching weather information: {}".format(str(exc))
+                    "Error fetching weather information: {}".format(str(exc))
                 )

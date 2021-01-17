@@ -1,8 +1,10 @@
 def get_wind_direction(deg):
-    return deg
+    direction = ["North", "East", "South", "West"]
+    return direction[round((deg % 360)/90)]
+
 
 class Weather:
-    """ Model for weather data
+    """Model for weather data
 
     Methods
     _______
@@ -10,6 +12,7 @@ class Weather:
     get_data():
         Return the data from weather_api call
     """
+
     def __init__(self, weatherData):
         """
         Parameters
@@ -18,24 +21,24 @@ class Weather:
         weatherData: dict
             The weather Data gotten from the API
         """
-        self.weather_data = weatherData;
+        self.weather_data = weatherData
 
     def get_data(self):
         """ Returns weather data """
 
         weather_data = self.weather_data
-        main = weather_data['main']
-        wind = weather_data['wind']
-        weath = weather_data['weather'][0]
+        main = weather_data["main"]
+        wind = weather_data["wind"]
+        weath = weather_data["weather"][0]
         weather = {
-            'temp': main['temp'],
-            'min_temp': main['temp_min'],
-            'max_temp': main['temp_max'],
-            'humidity': main['humidity'],
-            'windspeed': wind['speed'],
-            'windspeed_direction': get_wind_direction(wind['deg']),
-            'description': weath['description'],
-            'city': weather_data['name']
+            "temp": main["temp"],
+            "min_temp": main["temp_min"],
+            "max_temp": main["temp_max"],
+            "humidity": main["humidity"],
+            "windspeed": wind["speed"],
+            "windspeed_direction": get_wind_direction(wind["deg"]),
+            "description": weath["description"],
+            "city": weather_data["name"],
         }
 
         return weather
