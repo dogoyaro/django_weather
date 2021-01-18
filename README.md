@@ -21,9 +21,8 @@ openweathermap API.
     Pre-requisites: Docker
     
     - Ensure that you have docker installed
-    - Make a copy of the .env_ file and replace dummy environment variables with the real values
+    - Make a copy of the .env_sample file to a .env file and replace dummy environment variables with the real values
         NB: Application Id is provided by creating an account with openweatherapi.org
-    - export the environment variables
     - Run application
     - Navigate to the app when on localhost port 8000 on your browser
 
@@ -32,7 +31,6 @@ openweathermap API.
 ```sh
 $ git clone git@github.com:dogoyaro/django_weather.git
 $ cd chemondis
-$ source .env 
 $ docker-compose up
 ```
         
