@@ -2,7 +2,7 @@
 
 ## Introduction
 
-A Django application that accepts a city name as user input and provides current weather information, by consuming the
+A Django application that accepts a city name as user input and provides current weather information by consuming the
 openweathermap API.
 
 
@@ -24,7 +24,7 @@ openweathermap API.
     - Make a copy of the .env_sample file to a .env file and replace dummy environment variables with the real values
         NB: Application Id is provided by creating an account with openweatherapi.org
     - Run application
-    - Navigate to the app when on localhost port 8000 on your browser
+    - Navigate to the app on localhost port 8000 on your browser
 
 
 
